@@ -17,10 +17,20 @@ const faqs = [
 ];
 
 function App() {
+  const [openItemId, setOpenItemId] = useState(null);
+  function handleToggle(id, isOpen) {
+    isOpen ? setOpenItemId(null) : setOpenItemId(() => id);
+  }
   return (
     <div className="accordion">
       {faqs.map((faq, i) => (
-        <Accordion faq={faq} index={i + 1} key={i} />
+        <Accordion
+          key={i}
+          faq={faq}
+          index={i + 1}
+          isOpen={openItemId === i + 1 ? true : false}
+          onToggle={handleToggle}
+        />
       ))}
     </div>
   );
